@@ -2,7 +2,6 @@
 # Reusable workflow that builds the MacOS ARM versions of Libation.
 ---
 name: build
-runs-on: self-hosted
 
 on:
   workflow_call:
@@ -29,6 +28,7 @@ env:
 
 jobs:
   build:
+    runs-on: self-hosted
     strategy:
       matrix:
         os: [MacOS]
