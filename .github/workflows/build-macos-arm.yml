@@ -16,6 +16,12 @@ on:
         description: 'Skip running unit tests'
         required: false
         default: true
+      architecture:
+        type: string
+        description: 'Processor architecture'
+        required: false
+        default: arm64
+
 
 env:
   DOTNET_CONFIGURATION: 'Release'
@@ -28,7 +34,6 @@ jobs:
       matrix:
         os: [MacOS]
         ui: [Avalonia]
-        architecture: arm64
         release_name: [chardonnay]
     steps:
       - uses: actions/checkout@v3
