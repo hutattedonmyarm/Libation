@@ -1,6 +1,6 @@
 version=$1
 release_name="chardonnay"
-profile="Properties/PublishProfiles/MacOSArmProfile.pubxml"
+profile="Properties/PublishProfiles/MacOSProfile.pubxml"
 
 if [ -z "$version" ]
 then
@@ -10,10 +10,11 @@ fi
 
 # Publish
 cd ../Source
-dotnet publish -c Release LibationAvalonia/LibationAvalonia.csproj "-p:PublishProfile=LibationAvalonia/${profile}"
-dotnet publish -c Release LoadByOS/MacOSConfigApp/MacOSConfigApp.csproj "-p:PublishProfile=LoadByOS/MacOSConfigApp/${profile}"
-dotnet publish -c Release LibationCli/LibationCli.csproj "-p:PublishProfile=LibationCli/${profile}"
-dotnet publish -c Release HangoverAvalonia/HangoverAvalonia.csproj "-p:PublishProfile=HangoverAvalonia/${profile}"
+
+dotnet publish -c Release LibationAvalonia/LibationAvalonia.csproj "-p:PublishProfile=LibationAvalonia/${profile}" -p:RuntimeIdentifier=osx-arm64
+dotnet publish -c Release LoadByOS/MacOSConfigApp/MacOSConfigApp.csproj "-p:PublishProfile=LoadByOS/MacOSConfigApp/${profile}" -p:RuntimeIdentifier=osx-arm64
+dotnet publish -c Release LibationCli/LibationCli.csproj "-p:PublishProfile=LibationCli/${profile}" -p:RuntimeIdentifier=osx-arm64
+dotnet publish -c Release HangoverAvalonia/HangoverAvalonia.csproj "-p:PublishProfile=HangoverAvalonia/${profile}" -p:RuntimeIdentifier=osx-arm64
 
 # Remove x64 and x86 libraries, add arm64 libs
 rm "bin/Publish/MacOS-${release_name}/"ffmpegaac.*
