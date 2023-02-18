@@ -2,6 +2,7 @@
 
 FILE=$1; shift
 VERSION=$1; shift
+ARCH=$1; shift
 
 if [ -z "$FILE" ]
 then
@@ -19,6 +20,11 @@ if [ -z "$VERSION" ]
 then
   echo "This script must be called with the Libation version number as an argument."
   exit
+fi
+
+if [ -z "$ARCH" ]
+then
+  ARCH="x64"
 fi
 
 contains() { case "$1" in *"$2"*) true ;; *) false ;; esac }
@@ -70,14 +76,14 @@ sed -i -e "s/VERSION_STRING/$VERSION/" "$BUNDLE_CONTENTS/Info.plist"
 
 echo "deleting unneeded files.."
 delfiles=("libmp3lame.x64.so" "ffmpegaac.x64.so" "libation.icns" "Info.plist")
-for n in "${delfiles[@]}"; do rm "$BUNDLE_MACOS/$n"; done
+for n in "${delfiles[@]}"; do rm -f "$BUNDLE_MACOS/$n"; done
 
 echo "Creating app bundle: $BUNDLE-$VERSION.tar.gz"
 tar -czvf "$BUNDLE-$VERSION.tar.gz" "$BUNDLE"
 
 mkdir bundle
 echo "moving to ./bundle/$BUNDLE-$VERSION.tar.gz"
-mv "$BUNDLE-$VERSION.tar.gz" "./bundle/$BUNDLE-macOS-x64-$VERSION.tgz"
+mv "$BUNDLE-$VERSION.tar.gz" "./bundle/$BUNDLE-macOS-$ARCH-$VERSION.tgz"
 
 rm -r "$BUNDLE"
 

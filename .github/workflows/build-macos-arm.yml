@@ -86,7 +86,7 @@ jobs:
           rm ffmpegaac.x86.*
           rm ffmpegaac.x64.*
           osbuild="$(echo '${{ matrix.os }}' | tr '[:upper:]' '[:lower:]')"
-          artifact="Libation.${{ steps.get_version.outputs.version }}-${osbuild}-${{ matrix.release_name }}"
+          artifact="Libation.${{ steps.get_version.outputs.version }}-${osbuild}-${{ inputs.architecture }}-${{ matrix.release_name }}"
           echo "artifact=${artifact}" >> "${GITHUB_OUTPUT}"
           tar -zcvf "../${artifact}.tar.gz" .
 
