@@ -59,7 +59,7 @@ jobs:
         working-directory: ./Source
         run: |
           os=${{ matrix.os }}
-          RUNTIME_IDENTIFIER="$(echo ${os/[mM]acOS/osx})-${{ matrix.arch }}"
+          RUNTIME_IDENTIFIER="$(echo ${os} | tr '[:upper:]' '[:lower:]' | sed 's/macos/osx/')-${{ matrix.arch }}"
           echo "$RUNTIME_IDENTIFIER"
           dotnet publish \
               LibationAvalonia/LibationAvalonia.csproj \
