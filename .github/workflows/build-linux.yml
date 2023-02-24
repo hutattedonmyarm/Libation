@@ -91,7 +91,7 @@ jobs:
 
       - name: Build bundle
         id: bundle
-        working-directory: ./Source/bin/Publish/${{ steps.publish.output.display_os }}-${{ matrix.arch }}-${{ env.RELEASE_NAME }}
+        working-directory: ./Source/bin/Publish/${{ steps.publish.outputs.display_os }}-${{ matrix.arch }}-${{ env.RELEASE_NAME }}
         run: |
           BUNDLE_DIR=$(pwd)
           echo "Bundle dir: ${BUNDLE_DIR}"
