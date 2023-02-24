@@ -58,8 +58,8 @@ jobs:
         id: publish
         working-directory: ./Source
         run: |
-          target_os=$(${os/-latest/} | sed 's/ubuntu/linux/')
-          display_os=$(${os/macos/macOS} | sed 's/linux/Linux/')
+          target_os=$(echo ${os/-latest/} | sed 's/ubuntu/linux/')
+          display_os="$(echo ${target_os/macos/macOS} | sed 's/linux/Linux/')"
           echo $display_os >> $GITHUB_OUTPUT
           RUNTIME_IDENTIFIER="$(echo ${target_os/macos/osx}-${{ matrix.arch }}"
           echo "$RUNTIME_IDENTIFIER"
