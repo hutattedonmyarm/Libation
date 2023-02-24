@@ -96,7 +96,7 @@ jobs:
           BUNDLE_DIR=$(pwd)
           echo "Bundle dir: ${BUNDLE_DIR}"
           cd ..
-          SCRIPT=../../../Scripts/Bundle_${{ steps.publish.output.display_os }}.sh
+          SCRIPT=../../../Scripts/Bundle_${{ steps.publish.outputs.display_os }}.sh
           chmod +rx ${SCRIPT}
           ${SCRIPT} "${BUNDLE_DIR}" "${{ steps.get_version.outputs.version }}" "${{ matrix.arch }}"
           artifact=$(ls ./bundle)
